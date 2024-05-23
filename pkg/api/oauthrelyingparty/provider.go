@@ -32,15 +32,26 @@ func (c ProviderConfig) ClientID() string {
 	return client_id
 }
 
-func (c ProviderConfig) SetDefaultsModifyDisabledFalse() {
-	_, ok := c["modify_disabled"].(bool)
+func (c ProviderConfig) SetDefaultsCreateDisabled(defaultValue bool) {
+	_, ok := c["create_disabled"].(bool)
 	if !ok {
-		c["modify_disabled"] = false
+		c["create_disabled"] = defaultValue
 	}
 }
 
-func (c ProviderConfig) ModifyDisabled() bool {
-	modify_disabled, _ := c["modify_disabled"].(bool)
+func (c ProviderConfig) SetDefaultsDeleteDisabled(defaultValue bool) {
+	_, ok := c["delete_disabled"].(bool)
+	if !ok {
+		c["delete_disabled"] = defaultValue
+	}
+}
+
+func (c ProviderConfig) CreateDisabled() bool {
+	modify_disabled, _ := c["create_disabled"].(bool)
+	return modify_disabled
+}
+func (c ProviderConfig) DeleteDisabled() bool {
+	modify_disabled, _ := c["delete_disabled"].(bool)
 	return modify_disabled
 }
 
